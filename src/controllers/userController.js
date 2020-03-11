@@ -13,6 +13,59 @@ const saveUser = (req, res) => {
     });
 };
 
+const getUsers = (req, res) => {
+  userService
+    .getUsers()
+    .then(response => {
+      res.status(200).send(response);
+    })
+    .catch(err => {
+      console.log(err);
+    });
+};
+
+const getUserById = (req, res) => {
+  const { id } = req.params;
+  userService
+    .getUserById(id)
+    .then(response => {
+      res.status(200).send(response);
+    })
+    .catch(err => {
+      console.log(err);
+    });
+};
+
+const updateUser = (req, res) => {
+  const { id } = req.params;
+  const { edit } = req.body;
+  userService
+    .updateUser(id, edit)
+    .then(response => {
+      res.status(200).send(response);
+    })
+    .catch(err => {
+      console.log(err);
+    });
+};
+
+const deleteUser = (req, res) => {
+  const { id } = req.params;
+  userService
+    .deleteUser(id)
+    .then(response => {
+      // 204 significa No content: Sin contenido
+      res.status(204).send(response);
+    })
+    .catch(err => {
+      console.log(err);
+    });
+};
+
 module.exports = {
-  saveUser
+  saveUser,
+  getUsers,
+  getUserById,
+  updateUser,
+  deleteUser
 };

@@ -2,12 +2,10 @@
 const mongoose = require("mongoose");
 const app = require("./index");
 
-const { mongodb } = require("./keys");
-
 mongoose.Promise = global.Promise;
-
+console.log("===", process.env.MONGO_URI);
 mongoose
-  .connect(mongodb.URI, { useNewUrlParser: true })
+  .connect(process.env.MONGO_URI, { useNewUrlParser: true })
   .then(() => {
     console.log("La conexión se hizo correctamente!");
 
